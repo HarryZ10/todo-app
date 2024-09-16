@@ -1,6 +1,7 @@
 // src/screens/main/TodoListScreen.js
 import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, StyleSheet, ActivityIndicator, Alert } from 'react-native'; 
+import { AntDesign } from '@expo/vector-icons';
 import { useTodos } from '../../hooks/useTodos';
 
 const TodoItem = ({ item, onPress, onComplete, onDelete }) => (
@@ -76,8 +77,11 @@ const TodoListScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.retryButton} onPress={refreshTodos}>
+                <Text style={styles.retryButtonText}>Refresh</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.createButton} onPress={handleCreateTodo}>
-                <Text style={styles.createButtonText}>Create New Todo</Text>
+                <AntDesign name="plus" size={24} color="white" />
             </TouchableOpacity>
             <FlatList
                 data={todos}
@@ -130,15 +134,21 @@ const styles = StyleSheet.create({
         color: 'red',
     },
     createButton: {
+        position: 'absolute',
+        bottom: 30,
+        right: 30,
         backgroundColor: '#007AFF',
-        padding: 15,
-        borderRadius: 5,
-        marginBottom: 20,
-    },
-    createButtonText: {
-        color: 'white',
-        textAlign: 'center',
-        fontWeight: 'bold',
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 5, //  Android shadow
+        shadowColor: '#000', // iOS shadow
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        zIndex: 100,
     },
     centerContainer: {
         flex: 1,
@@ -148,12 +158,14 @@ const styles = StyleSheet.create({
     retryButton: {
         marginTop: 20,
         padding: 10,
+        marginBottom: 50,
         backgroundColor: '#007AFF',
         borderRadius: 5,
     },
     retryButtonText: {
         color: 'white',
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     emptyListText: {
         textAlign: 'center',
