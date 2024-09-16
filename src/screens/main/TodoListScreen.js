@@ -3,6 +3,7 @@ import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, StyleSheet, ActivityIndicator, Alert } from 'react-native'; 
 import { AntDesign } from '@expo/vector-icons';
 import { useTodos } from '../../hooks/useTodos';
+import { useAuth } from '../../contexts/AuthContext';
 
 const TodoItem = ({ item, onPress, onComplete, onDelete }) => (
     <View style={styles.todoItem}>
@@ -22,6 +23,7 @@ const TodoItem = ({ item, onPress, onComplete, onDelete }) => (
 
 const TodoListScreen = ({ navigation }) => {
 
+    const { signOut } = useAuth();
     const {
         todos,
         loading,
@@ -68,8 +70,8 @@ const TodoListScreen = ({ navigation }) => {
         return (
             <View style={styles.centerContainer}>
                 <Text>An error occurred: {error.message}</Text>
-                <TouchableOpacity style={styles.retryButton} onPress={refreshTodos}>
-                    <Text style={styles.retryButtonText}>Retry</Text>
+                <TouchableOpacity style={styles.standardButton} onPress={refreshTodos}>
+                    <Text style={styles.standardButtonText}>Retry</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -77,8 +79,11 @@ const TodoListScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.retryButton} onPress={refreshTodos}>
-                <Text style={styles.retryButtonText}>Refresh</Text>
+            <TouchableOpacity style={styles.standardButton} onPress={refreshTodos}>
+                <Text style={styles.standardButtonText}>Refresh</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.standardButton} onPress={signOut}>
+                <Text style={styles.standardButtonText}>Logout</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.createButton} onPress={handleCreateTodo}>
                 <AntDesign name="plus" size={24} color="white" />
@@ -155,14 +160,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    retryButton: {
+    standardButton: {
         marginTop: 20,
         padding: 10,
         marginBottom: 50,
         backgroundColor: '#007AFF',
         borderRadius: 5,
     },
-    retryButtonText: {
+    standardButtonText: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
