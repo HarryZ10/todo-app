@@ -14,12 +14,12 @@
 
 ## Installation
 
-Ensure `node` and `npm` is installed by verifying `node` or `npm` in your command line terminal.
+Note: Must be ran locally. Ensure `node` and `npm` is installed.
 
 1.`npm install`
 
 2. Setup `.env` credentials in root directory
 
-Look at Harry's latest email to Brandon/Maksim for credentials.
+Look at Harry's latest email to Brandon/Maksim for project credentials.
 
 3. `npx expo start`
