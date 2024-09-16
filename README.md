@@ -15,11 +15,8 @@
 ## Installation
 
 Note: Must be ran locally. Ensure `node` and `npm` is installed.
+For `.env` setup: look at Harry's latest email to Brandon/Maksim for project credentials.
 
 1.`npm install`
-
 2. Setup `.env` credentials in root directory
-
-Look at Harry's latest email to Brandon/Maksim for project credentials.
-
 3. `npx expo start`
